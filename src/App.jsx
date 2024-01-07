@@ -1,23 +1,14 @@
-import { useState } from 'react'
 import './App.css'
-import { useEffect } from 'react'
+import { Canvas } from "@react-three/fiber";
+import MyElement3D from './MyElement3D';
 
 const App = () => {
-  const [count, setCount] = useState(0)
-
-  const plusCount = () => {
-    setCount(count + 1)
-  }
-
-  useEffect(() => {
-    console.log(count);
-  })
-
   return (
-    <>
-      <div>vite@latest eslint</div>
-      <button onClick={plusCount}>count++</button>
-    </>
+    <div>
+      <Canvas>
+        <MyElement3D />
+      </Canvas>
+    </div>
   )
 }
 
