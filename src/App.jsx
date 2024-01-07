@@ -1,9 +1,22 @@
+import { useState } from 'react'
 import './App.css'
+import { useEffect } from 'react'
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0)
+
+  const plusCount = () => {
+    setCount(count + 1)
+  }
+
+  useEffect(() => {
+    console.log(count);
+  })
+
   return (
     <>
-      <div>home</div>
+      <div>vite@latest eslint</div>
+      <button onClick={plusCount}>count++</button>
     </>
   )
 }
