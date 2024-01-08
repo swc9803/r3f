@@ -1,23 +1,23 @@
-import { useFrame } from "@react-three/fiber"
-import { useRef } from "react"
+import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 
-const MyElement3D = () =>{
-    const refMesh = useRef()
-    useFrame((state, delta) => {
-        refMesh.current.rotation.y += delta
-    })
+const MyElement3D = () => {
+  const refMesh = useRef();
 
-    return (
-        <>
-        
-            <directionalLight position={[1, 1, 1]} />
+  useFrame((state, delta) => {
+    refMesh.current.rotation.y += delta;
+  });
 
-            <mesh ref={refMesh} rotation={[ 0, 45 * Math.PI / 180, 0 ]}>
-                <boxGeometry />
-                <meshStandardMaterial color="#e67e22" />
-            </mesh>
-        </>
-    )
-}
+  return (
+    <>
+      <directionalLight position={[1, 1, 1]} />
 
-export default MyElement3D
+      <mesh ref={refMesh} rotation={[0, (45 * Math.PI) / 180, 0]}>
+        <boxGeometry />
+        <meshStandardMaterial color="#e67e22" />
+      </mesh>
+    </>
+  );
+};
+
+export default MyElement3D;

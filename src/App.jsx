@@ -1,5 +1,5 @@
-import './App.css'
-import { Canvas } from "@react-three/fiber";
+import './App.css';
+import { Canvas } from '@react-three/fiber';
 import MyElement3D from './MyElement3D';
 
 const App = () => {
@@ -9,7 +9,7 @@ const App = () => {
         <MyElement3D />
       </Canvas>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
