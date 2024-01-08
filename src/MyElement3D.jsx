@@ -1,18 +1,17 @@
-import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
+import { OrbitControls } from '@react-three/drei';
 
 const MyElement3D = () => {
   const refMesh = useRef();
-
-  useFrame((state, delta) => {
-    refMesh.current.rotation.y += delta;
-  });
 
   return (
     <>
       <directionalLight position={[1, 1, 1]} />
 
-      <mesh ref={refMesh} rotation={[0, (45 * Math.PI) / 180, 0]}>
+      <axesHelper scale={10} />
+      <OrbitControls />
+
+      <mesh ref={refMesh}>
         <boxGeometry />
         <meshStandardMaterial color="#e67e22" />
       </mesh>
