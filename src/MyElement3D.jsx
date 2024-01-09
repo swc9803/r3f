@@ -1,39 +1,33 @@
-import { OrbitControls } from '@react-three/drei';
-import { useControls } from 'leva';
-import { useEffect, useRef } from 'react';
-// import * as THREE from 'three';
+import { MeshReflectorMaterial, OrbitControls } from '@react-three/drei';
 
 const MyElement3D = () => {
-  const refMesh = useRef();
-  const refWireMesh = useRef();
-
-  const { xSize, ySize, zSize, xSegments, ySegments, zSegments } = useControls({
-    xSize: { value: 1, min: 0.1, max: 5, step: 0.01 },
-    ySize: { value: 1, min: 0.1, max: 5, step: 0.01 },
-    zSize: { value: 1, min: 0.1, max: 5, step: 0.01 },
-    xSegments: { value: 1, min: 1, max: 10, step: 1 },
-    ySegments: { value: 1, min: 1, max: 10, step: 1 },
-    zSegments: { value: 1, min: 1, max: 10, step: 1 },
-  });
-
-  useEffect(() => {
-    refWireMesh.current.geometry = refMesh.current.geometry;
-  }, [xSize, ySize, zSize, xSegments, ySegments, zSegments]);
-
   return (
     <>
       <OrbitControls />
 
       <ambientLight intensity={0.1} />
-      <directionalLight position={[2, 1, 3]} intensity={0.5} />
+      <directionalLight position={[0, 1, 0]} />
+      <directionalLight position={[1, 2, 8]} intensity={0.7} />
 
-      <mesh ref={refMesh}>
-        <boxGeometry args={[xSize, ySize, zSize, xSegments, ySegments, zSegments]} />
-        <meshStandardMaterial color="#1abc9c" />
+      <mesh position={[0, -0.6, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[10, 10]} />
+        <MeshReflectorMaterial
+          blur={[300, 100]}
+          resolution={2048}
+          mixBlur={1}
+          mixStrength={30}
+          roughness={1}
+          depthScale={0.7}
+          minDepthThreshold={0.4}
+          maxDepthThreshold={1.4}
+          color="#050505"
+          metalness={0.5}
+        />
       </mesh>
 
-      <mesh ref={refWireMesh}>
-        <meshStandardMaterial emissive="yellow" wireframe={true} />
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry />
+        <meshStandardMaterial color="cyan" />
       </mesh>
     </>
   );
