@@ -1,35 +1,33 @@
-import { useRef } from 'react';
-import { OrbitControls } from '@react-three/drei';
+import { Box, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
+
+const MyBox = (props) => {
+  const geom = new THREE.BoxGeometry();
+  return <mesh {...props} geometry={geom}></mesh>;
+};
 
 const MyElement3D = () => {
-  const refMesh = useRef();
-
-  useFrame((state, delta) => {
-    refMesh.current.rotation.z += delta;
-  });
-
   return (
     <>
-      <directionalLight position={[1, 1, 1]} />
-
-      <axesHelper scale={10} />
       <OrbitControls />
+      <ambientLight intensity={0.1} />
+      <directionalLight position={[2, 1, 3]} intensity={0.5} />
 
-      <mesh
-        ref={refMesh}
-        position={[2, 0, 0]}
-        rotation-y={THREE.MathUtils.degToRad(45)}
-        scale={[2, 1, 1]}
-      >
+      {/* 1 */}
+      <mesh>
         <boxGeometry />
-        <meshStandardMaterial color="#e67e22" opacity={0.5} transparent={true} />
-        <mesh scale={[0.1, 0.1, 0.1]}>
-          <sphereGeometry />
-          <meshStandardMaterial color="red" />
-        </mesh>
+        <meshStandardMaterial color="#1abc9c" />
       </mesh>
+
+      {/* 2 three.js 사용 */}
+      <Box position={[1.2, 0, 0]}>
+        <meshStandardMaterial color="#8e44ad" />
+      </Box>
+
+      {/* 3 컴포넌트 사용 */}
+      <MyBox position={[-1.2, 0, 0]}>
+        <meshStandardMaterial color="#e74c3c" />
+      </MyBox>
     </>
   );
 };
