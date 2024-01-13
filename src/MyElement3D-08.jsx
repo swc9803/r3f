@@ -1,7 +1,13 @@
-import { OrbitControls } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
-import { useEffect, useRef } from 'react';
+import { OrbitControls, useHelper } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 import * as THREE from 'three';
+import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
+
+// 카메라 시점을 움직이는 원으로
+
+RectAreaLightUniformsLib.init();
 
 const torusGeometry = new THREE.TorusGeometry(0.4, 0.1, 32, 32);
 const torusMaterial = new THREE.MeshStandardMaterial({
@@ -14,39 +20,36 @@ const MyElement3D = () => {
   useFrame((state) => {
     const time = state.clock.elapsedTime;
     const smallSpherePivot = state.scene.getObjectByName('smallSpherePivot');
-    smallSpherePivot.rotation.y = THREE.MathUtils.degToRad(time * 10);
+    smallSpherePivot.rotation.y = THREE.MathUtils.degToRad(time * 50);
 
-    smallSpherePivot.children[0].getWorldPosition(light.current.target.position);
+    const target = new THREE.Vector3();
+    smallSpherePivot.children[0].getWorldPosition(target);
+    state.camera.position.copy(target);
+
+    const ghostSpherePivot = state.scene.getObjectByName('ghostSpherePivot');
+    ghostSpherePivot.rotation.y = THREE.MathUtils.degToRad(time * 50 + 30);
+    ghostSpherePivot.children[0].getWorldPosition(target);
+    state.camera.lookAt(target);
   });
 
   const light = useRef();
-
-  const { scene } = useThree();
-
-  useEffect(() => {
-    scene.add(light.current.target);
-    return () => {
-      scene.remove(light.current.target);
-    };
-  }, [light.current]);
+  useHelper(light, RectAreaLightHelper);
 
   return (
     <>
       <OrbitControls />
 
-      <ambientLight intensity={0.1} />
-
-      <spotLight
+      <rectAreaLight
+        color="#ffffff"
+        intensity={20}
+        width={1}
+        height={3}
         ref={light}
-        shadow-mapSize={[1024 * 4, 1024 * 4]}
-        castShadow
-        color={0xffffff}
-        intensity={0.9}
         position={[0, 5, 0]}
-        angle={THREE.MathUtils.degToRad(60)}
+        rotation-x={THREE.MathUtils.degToRad(-90)}
       />
 
-      <mesh receiveShadow rotation-x={THREE.MathUtils.degToRad(-90)}>
+      <mesh rotation-x={THREE.MathUtils.degToRad(-90)}>
         <planeGeometry args={[10, 10]} />
         <meshStandardMaterial
           color="#2c3e50"
@@ -56,17 +59,14 @@ const MyElement3D = () => {
         />
       </mesh>
 
-      <mesh castShadow receiveShadow position-y={1.7}>
-        <torusKnotGeometry args={[1, 0.2, 128, 32]} />
+      <mesh rotation-x={THREE.MathUtils.degToRad(-90)}>
+        <sphereGeometry args={[1.5, 64, 64, 0, Math.PI]} />
         <meshStandardMaterial color="#ffffff" roughness={0.1} metalness={0.2} />
       </mesh>
-
-      {new Array(10).fill().map((item, index) => {
+      {new Array(8).fill().map((item, index) => {
         return (
           <group key={index} rotation-y={THREE.MathUtils.degToRad(45 * index)}>
             <mesh
-              castShadow
-              receiveShadow
               geometry={torusGeometry}
               material={torusMaterial}
               position={[3, 0.5, 0]}
@@ -82,6 +82,10 @@ const MyElement3D = () => {
           <sphereGeometry args={[0.3, 32, 32]} />
           <meshStandardMaterial color="#e74c3c" roughness={0.2} metalness={0.5} />
         </mesh>
+      </group>
+
+      <group name="ghostSpherePivot">
+        <object3D position={[3, 0.5, 0]} />
       </group>
     </>
   );

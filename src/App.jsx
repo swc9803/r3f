@@ -7,7 +7,8 @@ const App = () => {
     <div>
       <Canvas
         camera={{
-          fov: 75,
+          near: 0.1,
+          far: 100,
           position: [7, 7, 0],
         }}
       >
