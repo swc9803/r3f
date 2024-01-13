@@ -1,9 +1,10 @@
 import { OrbitControls, useHelper } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
 import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
+import { useControls } from 'leva';
 
 RectAreaLightUniformsLib.init();
 
@@ -23,6 +24,24 @@ const MyElement3D = () => {
 
   const light = useRef();
   useHelper(light, RectAreaLightHelper);
+
+  const { camera } = useThree();
+  useControls({
+    positionZ: {
+      value: 0,
+      min: -10,
+      max: 10,
+      step: 0.1,
+      onChange: (v) => (camera.position.z = v),
+    },
+    targetZ: {
+      value: 0,
+      min: -10,
+      max: 10,
+      step: 0.1,
+      onChange: (v) => camera.lookAt(0, 0, v),
+    },
+  });
 
   return (
     <>
