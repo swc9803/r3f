@@ -1,6 +1,11 @@
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, useHelper } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 import * as THREE from 'three';
+import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
+
+RectAreaLightUniformsLib.init();
 
 const torusGeometry = new THREE.TorusGeometry(0.4, 0.1, 32, 32);
 const torusMaterial = new THREE.MeshStandardMaterial({
@@ -16,11 +21,22 @@ const MyElement3D = () => {
     smallSpherePivot.rotation.y = THREE.MathUtils.degToRad(time * 50);
   });
 
+  const light = useRef();
+  useHelper(light, RectAreaLightHelper);
+
   return (
     <>
       <OrbitControls />
 
-      <ambientLight color="#ffffff" intensity={5} />
+      <rectAreaLight
+        color="#ffffff"
+        intensity={20}
+        width={1}
+        height={3}
+        ref={light}
+        position={[0, 5, 0]}
+        rotation-x={THREE.MathUtils.degToRad(-90)}
+      />
 
       <mesh rotation-x={THREE.MathUtils.degToRad(-90)}>
         <planeGeometry args={[10, 10]} />
