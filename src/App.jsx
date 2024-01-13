@@ -6,9 +6,8 @@ const App = () => {
   return (
     <div>
       <Canvas
+        shadows
         camera={{
-          near: 0.1,
-          far: 100,
           position: [7, 7, 0],
         }}
       >
