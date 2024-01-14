@@ -1,10 +1,6 @@
 import { OrbitControls } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import {
-  BrightnessContrast,
-  EffectComposer,
-  HueSaturation,
-} from '@react-three/postprocessing';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { useControls } from 'leva';
 import * as THREE from 'three';
 
@@ -22,44 +18,27 @@ const MyElement3D = () => {
     smallSpherePivot.rotation.y = THREE.MathUtils.degToRad(time * 50);
   });
 
-  const { enabled, hue, saturation } = useControls('HueSaturation', {
-    enabled: { value: true },
-    hue: {
-      value: 0,
-      min: 0,
-      max: Math.PI,
-      step: 0.1,
+  const { intensity, mipmapBlur, luminanceThreshold, luminanceSmoothing } = useControls(
+    'Bloom',
+    {
+      intensity: { value: 1, min: 0, max: 10, step: 0.01 },
+      mipmapBlur: { value: false },
+      luminanceThreshold: { value: 0.9, min: 0, max: 1, step: 0.01 },
+      luminanceSmoothing: { value: 0.025, min: 0, max: 2, step: 0.01 },
     },
-    saturation: {
-      value: 0,
-      min: 0,
-      max: Math.PI,
-      step: 0.1,
-    },
-  });
-
-  const { brightness, contrast } = useControls({
-    brightness: {
-      value: 0,
-      min: -1,
-      max: 1,
-      step: 0.1,
-    },
-    contrast: {
-      value: 0,
-      min: -1,
-      max: 1,
-      step: 0.1,
-    },
-  });
+  );
 
   return (
     <>
       <OrbitControls />
 
-      <EffectComposer disableNormalPass enabled={enabled}>
-        <HueSaturation hue={hue} saturation={saturation} />
-        <BrightnessContrast brightness={brightness} saturation={saturation} />
+      <EffectComposer disableNormalPass>
+        <Bloom
+          intensity={intensity}
+          mipmapBlur={mipmapBlur}
+          luminanceThreshold={luminanceThreshold}
+          luminanceSmoothing={luminanceSmoothing}
+        />
       </EffectComposer>
 
       <ambientLight intensity={0.1} />
@@ -104,7 +83,15 @@ const MyElement3D = () => {
       <group name="smallSpherePivot">
         <mesh castShadow receiveShadow position={[3, 0.5, 0]}>
           <sphereGeometry args={[0.3, 32, 32]} />
-          <meshStandardMaterial color="#e74c3c" roughness={0.2} metalness={0.5} />
+          <meshStandardMaterial
+            color="#e74c3c"
+            roughness={0.2}
+            metalness={0.5}
+            emissive="#ff4c3c"
+            toneMapped={false}
+            emissiveIntensity={50}
+          />
+          <pointLight color="#ff4c3c" intensity={20} />
         </mesh>
       </group>
     </>
