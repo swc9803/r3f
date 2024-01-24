@@ -1,19 +1,23 @@
 import './App.css';
+import styled from 'styled-components';
 import { Canvas } from '@react-three/fiber';
-import MyElement3D from './MyElement3D';
+import { Suspense } from 'react';
+import Earth from './components/earth/index.jsx';
+
+const CanvasContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const App = () => {
   return (
-    <div>
-      <Canvas
-        shadows
-        camera={{
-          position: [7, 7, 0],
-        }}
-      >
-        <MyElement3D />
+    <CanvasContainer>
+      <Canvas>
+        <Suspense fallback={null}>
+          <Earth />
+        </Suspense>
       </Canvas>
-    </div>
+    </CanvasContainer>
   );
 };
 
