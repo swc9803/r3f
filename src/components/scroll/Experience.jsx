@@ -1,14 +1,14 @@
 import { OrbitControls } from '@react-three/drei';
+import Office from './Office.jsx';
 
-// export const Experience = () => {
 const Experience = () => {
   return (
     <>
+      <ambientLight intensity={3} />
+
       <OrbitControls />
-      <mesh>
-        <boxGeometry />
-        <meshNormalMaterial />
-      </mesh>
+
+      <Office />
     </>
   );
 };
