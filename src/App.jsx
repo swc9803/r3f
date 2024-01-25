@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/home/index.jsx';
 import Earth from './components/earth/index.jsx';
 import MipMap from './components/mipmap/index.jsx';
+import Scroll from './components/scroll/index.jsx';
 
 const CanvasContainer = styled.div`
   width: 100%;
@@ -18,6 +19,7 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route path="/earth" element={<Earth />} />
           <Route path="/mipmap" element={<MipMap />} />
+          <Route path="/scroll" element={<Scroll />} />
         </Routes>
       </CanvasContainer>
     </Router>
