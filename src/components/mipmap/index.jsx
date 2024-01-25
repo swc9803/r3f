@@ -1,6 +1,6 @@
-import './App.css';
 import { Canvas } from '@react-three/fiber';
-import MyElement3D from './MyElement3D';
+import MyElement3D from './MyElement3D.jsx';
+import './index.css';
 
 const App = () => {
   return (

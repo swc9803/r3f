@@ -1,9 +1,9 @@
 import './App.css';
 import styled from 'styled-components';
-import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/home/index.jsx';
 import Earth from './components/earth/index.jsx';
-import TopSection from './components/earth/topSection.jsx';
+import MipMap from './components/mipmap/index.jsx';
 
 const CanvasContainer = styled.div`
   width: 100%;
@@ -12,14 +12,15 @@ const CanvasContainer = styled.div`
 
 const App = () => {
   return (
-    <CanvasContainer>
-      <TopSection />
-      <Canvas>
-        <Suspense fallback={null}>
-          <Earth />
-        </Suspense>
-      </Canvas>
-    </CanvasContainer>
+    <Router>
+      <CanvasContainer>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/earth" element={<Earth />} />
+          <Route path="/mipmap" element={<MipMap />} />
+        </Routes>
+      </CanvasContainer>
+    </Router>
   );
 };
 

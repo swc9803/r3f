@@ -1,4 +1,7 @@
-import { useFrame, useLoader } from '@react-three/fiber';
+import styled from 'styled-components';
+import { Suspense, useRef } from 'react';
+import TopSection from './topSection.jsx';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import { TextureLoader } from 'three';
 import * as THREE from 'three';
@@ -7,7 +10,11 @@ import EarthDayMap from '../../assets/textures/earth/8k_earth_daymap.jpg';
 import EarthNormalMap from '../../assets/textures/earth/8k_earth_normal_map.jpg';
 import EarthSpecularMap from '../../assets/textures/earth/8k_earth_specular_map.jpg';
 import EarthCloudsMap from '../../assets/textures/earth/8k_earth_clouds.jpg';
-import { useRef } from 'react';
+
+const CanvasContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const Earth = () => {
   const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(TextureLoader, [
@@ -70,4 +77,17 @@ const Earth = () => {
   );
 };
 
-export default Earth;
+const App = () => {
+  return (
+    <CanvasContainer>
+      <TopSection />
+      <Canvas>
+        <Suspense fallback={null}>
+          <Earth />
+        </Suspense>
+      </Canvas>
+    </CanvasContainer>
+  );
+};
+
+export default App;
