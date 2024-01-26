@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 canvas {
-  height: 100vh;
+  /* height: 100vh; */
   background: #d9afd9;
   background-image: linear-gradient(0deg, #d9afd9 0, #97d9e1 100%);
 }
