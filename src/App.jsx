@@ -6,6 +6,7 @@ import Earth from './components/earth/index.jsx';
 import MipMap from './components/mipmap/index.jsx';
 import Scroll from './components/scroll/index.jsx';
 import Rapier from './components/rapier/index.jsx';
+import Transition from './components/transition/index.jsx';
 
 const CanvasContainer = styled.div`
   width: 100%;
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/mipmap" element={<MipMap />} />
           <Route path="/scroll" element={<Scroll />} />
           <Route path="/rapier" element={<Rapier />} />
+          <Route path="/transition" element={<Transition />} />
         </Routes>
       </CanvasContainer>
     </Router>
