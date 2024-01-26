@@ -5,6 +5,7 @@ import Home from './components/home/index.jsx';
 import Earth from './components/earth/index.jsx';
 import MipMap from './components/mipmap/index.jsx';
 import Scroll from './components/scroll/index.jsx';
+import Rapier from './components/rapier/index.jsx';
 
 const CanvasContainer = styled.div`
   width: 100%;
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/earth" element={<Earth />} />
           <Route path="/mipmap" element={<MipMap />} />
           <Route path="/scroll" element={<Scroll />} />
+          <Route path="/rapier" element={<Rapier />} />
         </Routes>
       </CanvasContainer>
     </Router>
