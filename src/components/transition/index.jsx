@@ -1,14 +1,22 @@
-import { Canvas } from '@react-three/fiber';
+import { Canvas, extend } from '@react-three/fiber';
+import { Leva } from 'leva';
 import Experience from './Experience';
-import { Suspense } from 'react';
+
+import { TransitionMaterial } from './TransitionMaterial';
+
+extend({
+  TransitionMaterial,
+});
 
 const App = () => {
   return (
-    <Canvas shadows camera={{ position: [10, 10, 10], fov: 30 }}>
-      <Suspense>
+    <>
+      <Leva />
+      <Canvas shadows camera={{ position: [0, 0, 5], fov: 30 }}>
+        <color attach="background" args={['#333']} />
         <Experience />
-      </Suspense>
-    </Canvas>
+      </Canvas>
+    </>
   );
 };
 
