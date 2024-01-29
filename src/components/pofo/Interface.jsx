@@ -15,6 +15,10 @@ const Section = (props) => {
       whileInView={{
         opacity: 1,
         y: 0,
+        transition: {
+          duration: 1,
+          delay: 0.6,
+        },
       }}
     >
       {children}
@@ -43,12 +47,40 @@ const AboutSection = () => {
         <br />
         <span className="bg-white px-1 italic">Sung</span>
       </h1>
-      <p className="text-lg text-gray-600 mt-4">I develope interactive web</p>
-      <button
+      <motion.p
+        className="text-lg text-gray-600 mt-4"
+        initial={{
+          opacity: 0,
+          y: 25,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 1,
+          delay: 1.5,
+        }}
+      >
+        I develope interactive web
+      </motion.p>
+      <motion.button
         className={`bg-indigo-600 text-white py-4 px-8 rounded-lg font-bold text-lg mt-16`}
+        initial={{
+          opacity: 0,
+          y: 25,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        transition={{
+          duration: 1,
+          delay: 2,
+        }}
       >
         Contact me
-      </button>
+      </motion.button>
     </Section>
   );
 };
@@ -93,16 +125,45 @@ const languages = [
 const SkillsSection = () => {
   return (
     <Section>
-      <div>
+      <motion.div whileInView={'visible'}>
         <h2 className="text-5xl font-bold">Skills</h2>
         <div className=" mt-8 space-y-4">
           {skills.map((skill, index) => (
             <div className="w-64" key={index}>
-              <h3 className="text-xl font-bold text-gray-800">{skill.title}</h3>
+              <motion.h3
+                className="text-xl font-bold text-gray-800"
+                initial={{
+                  opacity: 0,
+                }}
+                variants={{
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      duration: 1,
+                      delay: 1 + index * 0.2,
+                    },
+                  },
+                }}
+              >
+                {skill.title}
+              </motion.h3>
               <div className="h-2 w-full bg-gray-200 rounded-full mt-2">
-                <div
-                  className="h-full bg-indigo-500 rounded-full"
+                <motion.div
+                  className="h-full bg-indigo-500 rounded-full "
                   style={{ width: `${skill.level}%` }}
+                  initial={{
+                    scaleX: 0,
+                    originX: 0,
+                  }}
+                  variants={{
+                    visible: {
+                      scaleX: 1,
+                      transition: {
+                        duration: 1,
+                        delay: 1 + index * 0.2,
+                      },
+                    },
+                  }}
                 />
               </div>
             </div>
@@ -113,18 +174,47 @@ const SkillsSection = () => {
           <div className=" mt-8 space-y-4">
             {languages.map((lng, index) => (
               <div className="w-64" key={index}>
-                <h3 className="text-xl font-bold text-gray-800">{lng.title}</h3>
+                <motion.h3
+                  className="text-xl font-bold text-gray-800"
+                  initial={{
+                    opacity: 0,
+                  }}
+                  variants={{
+                    visible: {
+                      opacity: 1,
+                      transition: {
+                        duration: 1,
+                        delay: 2 + index * 0.2,
+                      },
+                    },
+                  }}
+                >
+                  {lng.title}
+                </motion.h3>
                 <div className="h-2 w-full bg-gray-200 rounded-full mt-2">
-                  <div
+                  <motion.div
                     className="h-full bg-indigo-500 rounded-full "
                     style={{ width: `${lng.level}%` }}
+                    initial={{
+                      scaleX: 0,
+                      originX: 0,
+                    }}
+                    variants={{
+                      visible: {
+                        scaleX: 1,
+                        transition: {
+                          duration: 1,
+                          delay: 2 + index * 0.2,
+                        },
+                      },
+                    }}
                   />
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </Section>
   );
 };
