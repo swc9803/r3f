@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 // import { OrbitControls } from '@react-three/drei';
 
 import { motion } from 'framer-motion';
@@ -24,6 +25,10 @@ const Section = (props) => {
       {children}
     </motion.section>
   );
+};
+
+Section.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 const Interface = () => {
