@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-// import { OrbitControls } from '@react-three/drei';
 
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion-3d';
 
 const Section = (props) => {
   const { children } = props;
