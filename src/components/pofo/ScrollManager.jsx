@@ -17,12 +17,12 @@ const ScrollManager = (props) => {
   useEffect(() => {
     gsap.to(data.el, {
       duration: 1,
-      scrollTop: section * data.el.clientsHeight,
+      scrollTop: section * data.el.clientHeight,
       onStart: () => {
         isAnimating.current = true;
       },
       onComplete: () => {
-        isAnimating.current = true;
+        isAnimating.current = false;
       },
     });
   }, [data.el, section]);
@@ -33,8 +33,8 @@ const ScrollManager = (props) => {
       return;
     }
 
-    const currentScroll = Math.floor(data.scroll.current * data.pages);
-    if (data.scroll.current > lastScroll.current && currentScroll === 0) {
+    const currentSection = Math.floor(data.scroll.current * data.pages);
+    if (data.scroll.current > lastScroll.current && currentSection === 0) {
       onSectionChange(1);
     }
     if (
