@@ -8,6 +8,7 @@ import Scroll from './components/scroll/index.jsx';
 import Rapier from './components/rapier/index.jsx';
 import Transition from './components/transition/index.jsx';
 import Pofo from './components/pofo/index.jsx';
+import Hover from './components/hover/index.jsx';
 
 const CanvasContainer = styled.div`
   width: 100%;
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/rapier" element={<Rapier />} />
           <Route path="/transition" element={<Transition />} />
           <Route path="/pofo" element={<Pofo />} />
+          <Route path="/hover" element={<Hover />} />
         </Routes>
       </CanvasContainer>
     </Router>

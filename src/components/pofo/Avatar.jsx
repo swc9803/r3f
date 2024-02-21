@@ -15,7 +15,7 @@ const Avatar = (props) => {
     wireframe: false,
   });
   const group = useRef();
-  const { nodes, materials } = useGLTF('models/646d9dcdc8a5f5bddbfac913.glb');
+  const { nodes, materials } = useGLTF('models/people.glb');
 
   const { animations: typingAnimation } = useFBX('animations/Typing.fbx');
   const { animations: standingAnimation } = useFBX('animations/Standing Idle.fbx');
@@ -119,6 +119,6 @@ const Avatar = (props) => {
   );
 };
 
-useGLTF.preload('models/646d9dcdc8a5f5bddbfac913.glb');
+useGLTF.preload('models/people.glb');
 
 export default Avatar;
