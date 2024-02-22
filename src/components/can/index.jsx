@@ -1,18 +1,20 @@
 import './index.css';
-import { Grape } from './Grape.jsx';
-import { Lime } from './Lime.jsx';
-import { Orange } from './Orange.jsx';
-import { Peach } from './Peach.jsx';
-import { Strawberry } from './Strawberry.jsx';
+import { Model } from './Model.jsx';
+// import { Grape } from './Grape.jsx';
+// import { Lime } from './Lime.jsx';
+// import { Orange } from './Orange.jsx';
+// import { Peach } from './Peach.jsx';
+// import { Strawberry } from './Strawberry.jsx';
 
 const App = () => {
   return (
     <>
-      <Grape />
+      <Model />
+      {/* <Grape />
       <Lime />
       <Orange />
       <Peach />
-      <Strawberry />
+      <Strawberry /> */}
     </>
   );
 };
