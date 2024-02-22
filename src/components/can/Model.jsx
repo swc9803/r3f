@@ -5,55 +5,48 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import './index.css';
 
-export const Model = ({ selectedColor }) => {
+export const Model = (props) => {
   const gltf = useLoader(GLTFLoader, '/can/can.glb');
 
   const canAnimationTl = gsap.timeline();
 
-  canAnimationTl.from(gltf.scene.scale, {
-    x: 2,
-    y: 2,
-    z: 2,
-    duration: 2,
-    ease: 'power2',
-    delay: 0.5,
+  canAnimationTl.to(gltf.scene.rotation, {
+    y: `+=${Math.PI * 2}`,
+    duration: 1,
+    delay: 0.25,
   });
+  canAnimationTl.from(
+    gltf.scene.scale,
+    {
+      x: 2,
+      y: 2,
+      z: 2,
+      ease: 'power2',
+      duration: 1,
+    },
+    '<',
+  );
   canAnimationTl.to(gltf.scene.rotation, {
     y: `+=${Math.PI * 2}`,
     duration: 10,
     ease: 'none',
     repeat: -1,
   });
-  canAnimationTl.to(
-    gltf.scene.rotation,
-    {
-      z: -0.3,
-      duration: 5,
-      ease: 'none',
-      repeat: -1,
-      yoyo: true,
-    },
-    '<',
-  );
 
   useEffect(() => {
     gltf.scene.traverse((node) => {
       if (node instanceof THREE.Mesh) {
         if (node.name === 'model') {
           gsap.to(node.material.color, {
-            r: new THREE.Color(selectedColor).r,
-            g: new THREE.Color(selectedColor).g,
-            b: new THREE.Color(selectedColor).b,
+            r: new THREE.Color(props).r,
+            g: new THREE.Color(props).g,
+            b: new THREE.Color(props).b,
             duration: 0.75,
           });
         }
       }
     });
-    gsap.to(gltf.scene.rotation, {
-      y: `+=${Math.PI * 2}`,
-      duration: 0.75,
-    });
-  }, [gltf.scene, selectedColor]);
+  }, [gltf.scene, props]);
 
   return (
     <>

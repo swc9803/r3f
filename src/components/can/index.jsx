@@ -7,7 +7,7 @@ const App = () => {
     <>
       <Interface />
       <Canvas>
-        <Model />
+        <Model color="#ff0000" />
       </Canvas>
     </>
   );
