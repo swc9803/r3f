@@ -8,7 +8,7 @@ export const Strawberry = () => {
         fill="none"
         viewBox="0 0 800 800"
       >
-        <g clip-path="url(#a)">
+        <g clipPath="url(#a)">
           <path
             fill="#5BCA49"
             d="M480.546 94.646 515.641 1l51.904 69.958 76.713-29.43 11.392 92.709-60.986 60.985L480.546 94.646Z"
