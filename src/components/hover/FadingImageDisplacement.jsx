@@ -53,7 +53,7 @@ export const FadingImageDisplacement = (props) => {
   ]);
   const [hovered, setHover] = useState(false);
   useFrame((_state, delta) => {
-    easing.damp(ref.current, 'dispFactor', hovered ? 1 : 0, 0.4, delta);
+    easing.damp(ref.current, 'dispFactor', hovered ? 1 : 0, 0.2, delta);
   });
   return (
     <mesh

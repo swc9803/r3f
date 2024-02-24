@@ -1,10 +1,12 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Grape } from './Grape.jsx';
 import { Lime } from './Lime.jsx';
 import { Orange } from './Orange.jsx';
 import { Peach } from './Peach.jsx';
 import { Strawberry } from './Strawberry.jsx';
 import gsap from 'gsap';
+import { Model } from './Model.jsx';
+import { Canvas } from '@react-three/fiber';
 
 export const Interface = () => {
   const flavor = [
@@ -15,22 +17,13 @@ export const Interface = () => {
     { name: 'Lime', color: '#BFFF00' },
   ];
 
-  const nameRef = useRef(null);
-  const [currentName, setCurrentName] = useState('Grape');
+  const [selectedFlavor, setSelectedFlavor] = useState(flavor[0]);
   const [preventClick, setPreventClick] = useState(false);
 
   const selectFlavor = (color, name) => {
-    if (!preventClick && currentName !== name) {
+    if (!preventClick && selectedFlavor.name !== name) {
       setPreventClick(true);
-      setCurrentName(name);
-
-      // const refs = {
-      //   Grape: grapeRef.current,
-      //   Strawberry: strawberryRef.current,
-      //   Peach: peachRef.current,
-      //   Orange: orangeRef.current,
-      //   Lime: limeRef.current,
-      // };
+      setSelectedFlavor({ name, color });
 
       gsap.timeline({
         onStart: () => {},
@@ -47,9 +40,7 @@ export const Interface = () => {
 
   return (
     <div className="switch_container">
-      <div ref={nameRef} className="name">
-        {currentName}
-      </div>
+      <div className="name">{selectedFlavor.name}</div>
       <div className="fruit">
         <Grape />
         <Lime />
@@ -64,6 +55,9 @@ export const Interface = () => {
           </button>
         ))}
       </div>
+      <Canvas>
+        <Model selectedFlavor={selectedFlavor} />
+      </Canvas>
     </div>
   );
 };

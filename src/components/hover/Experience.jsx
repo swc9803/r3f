@@ -6,7 +6,7 @@ export const Experience = () => {
   return (
     <>
       <OrbitControls />
-      <FadingImageDisplacement position-x={1.5} position-z={-2} />
+      <FadingImageDisplacement position-x={1.5} />
       <FadingImage position-x={-1.5} />
     </>
   );

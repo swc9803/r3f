@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import './index.css';
 
-export const Model = (props) => {
+export const Model = ({ selectedFlavor }) => {
   const gltf = useLoader(GLTFLoader, '/can/can.glb');
 
   const canAnimationTl = gsap.timeline();
@@ -38,15 +38,15 @@ export const Model = (props) => {
       if (node instanceof THREE.Mesh) {
         if (node.name === 'model') {
           gsap.to(node.material.color, {
-            r: new THREE.Color(props).r,
-            g: new THREE.Color(props).g,
-            b: new THREE.Color(props).b,
+            r: new THREE.Color(selectedFlavor.color).r,
+            g: new THREE.Color(selectedFlavor.color).g,
+            b: new THREE.Color(selectedFlavor.color).b,
             duration: 0.75,
           });
         }
       }
     });
-  }, [gltf.scene, props]);
+  }, [gltf.scene, selectedFlavor]);
 
   return (
     <>
