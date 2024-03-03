@@ -1,6 +1,9 @@
 import './App.css';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Lenis from '@studio-freight/lenis';
+
 import Home from './components/home/index.jsx';
 import Earth from './components/earth/index.jsx';
 import MipMap from './components/mipmap/index.jsx';
@@ -10,6 +13,7 @@ import Transition from './components/transition/index.jsx';
 import Pofo from './components/pofo/index.jsx';
 import Hover from './components/hover/index.jsx';
 import Can from './components/can/index.jsx';
+import Clip from './components/clip/index.jsx';
 import Test from './components/test/index.jsx';
 
 const CanvasContainer = styled.div`
@@ -18,6 +22,15 @@ const CanvasContainer = styled.div`
 `;
 
 const App = () => {
+  const lenis = new Lenis();
+
+  const lenisScroll = (time) => {
+    lenis.raf(time);
+    requestAnimationFrame(lenisScroll);
+  };
+
+  lenisScroll();
+
   return (
     <Router>
       <CanvasContainer>
@@ -31,6 +44,7 @@ const App = () => {
           <Route path="/pofo" element={<Pofo />} />
           <Route path="/hover" element={<Hover />} />
           <Route path="/can" element={<Can />} />
+          <Route path="/clip" element={<Clip />} />
           <Route path="/test" element={<Test />} />
         </Routes>
       </CanvasContainer>
