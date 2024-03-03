@@ -1,39 +1,46 @@
+import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useRef, useEffect } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const Section1 = () => {
-  const boxRef1 = useRef();
-  const boxRef2 = useRef();
-  const boxRef3 = useRef();
-
+const ButtonAppear = () => {
   useEffect(() => {
-    gsap.to(boxRef1.current, {
-      scrollTrigger: {
-        trigger: boxRef1.current,
-        start: 'top 40%',
-        end: '+=100',
-        scrub: 2,
-        markers: true,
-      },
-      opacity: 0.1,
-      duration: 3,
+    gsap.from('.button1', {
+      scale: 0,
+      stagger: 0.1,
+      repeat: -1,
+      repeatDelay: 1,
+      duration: 1,
+      ease: 'power2.out',
+    });
+    gsap.from('.img1', {
+      scaleY: 0,
+      delay: 0.3,
+      repeat: -1,
+      repeatDelay: 1.3,
+      duration: 1,
+      ease: 'power2.out',
     });
   }, []);
 
   return (
+    <div class="button_container">
+      <div class="button_wrapper">
+        <button class="button1">button1</button>
+        <button class="button1">button2</button>
+        <button class="button1">button3</button>
+        <button class="button1">button4</button>
+      </div>
+      <img class="img1" src="/hover/kerrigan-zerg.png" alt="kerrigan" />
+    </div>
+  );
+};
+
+export const Section1 = () => {
+  return (
     <>
-      <div ref={boxRef1} className="box box1">
-        box1
-      </div>
-      <div ref={boxRef2} className="box box2">
-        box2
-      </div>
-      <div ref={boxRef3} className="box box3">
-        box3
-      </div>
+      <ButtonAppear />
     </>
   );
 };

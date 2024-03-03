@@ -20,3 +20,36 @@
     background: yellow;
   }
 }
+
+.button_container {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 200px;
+  padding: 10px;
+  border-radius: 2em;
+  background: rgb(7, 7, 7);
+  .button_wrapper {
+    display: inline-grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      border-radius: 2em;
+      width: 100px;
+      height: 100px;
+      background: rgb(43, 43, 43);
+      color: rgb(230, 230, 230);
+      cursor: pointer;
+    }
+  }
+  img {
+    margin-left: 10px;
+    width: auto;
+    height: 100%;
+    border-radius: 0.5em;
+  }
+}
