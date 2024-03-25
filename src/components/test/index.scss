@@ -131,3 +131,18 @@
     }
   }
 }
+
+.full_wrapper {
+  margin-top: 50px;
+  width: 100%;
+  height: 500px;
+  .fill_full {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+  }
+}

@@ -82,6 +82,25 @@ const Reverse = () => {
   );
 };
 
+const FillFull = () => {
+  useEffect(() => {
+    gsap.from('.fill_full', {
+      width: '80%',
+      height: '80%',
+      duration: 3,
+      ease: 'power2.out',
+      repeat: -1,
+      repeatDelay: 1,
+    });
+  }, []);
+
+  return (
+    <div className="full_wrapper">
+      <div className="fill_full" />
+    </div>
+  );
+};
+
 const texts = [
   { text: 'M' },
   { text: 'Y' },
@@ -152,6 +171,7 @@ export const Section1 = () => {
       <Mask />
       <Reverse />
       <FillBox />
+      <FillFull />
     </>
   );
 };
