@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import { Color } from 'three';
 import { Text } from '@react-three/drei';
 
-export default function Box({ text, ...props }) {
+export const Box = ({ text, ...props }) => {
   const ref = useRef();
   const black = useMemo(() => new Color('black'), []);
   const lime = useMemo(() => new Color('lime'), []);
@@ -31,4 +31,4 @@ export default function Box({ text, ...props }) {
       {props.children}
     </mesh>
   );
-}
+};
