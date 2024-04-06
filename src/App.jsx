@@ -15,6 +15,7 @@ import Hover from './components/hover/index.jsx';
 import Can from './components/can/index.jsx';
 import Clip from './components/clip/index.jsx';
 import Camera from './components/camera/index.jsx';
+import Camping from './components/camping/index.jsx';
 import Test from './components/test/index.jsx';
 
 const CanvasContainer = styled.div`
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/can" element={<Can />} />
           <Route path="/clip" element={<Clip />} />
           <Route path="/camera" element={<Camera />} />
+          <Route path="/camping" element={<Camping />} />
           <Route path="/test" element={<Test />} />
         </Routes>
       </CanvasContainer>
