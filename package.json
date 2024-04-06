@@ -21,6 +21,7 @@
     "framer-motion": "^11.0.3",
     "framer-motion-3d": "^11.0.3",
     "gsap": "^3.12.5",
+    "jotai": "^2.7.2",
     "leva": "^0.9.35",
     "maath": "^0.10.7",
     "prop-types": "^15.8.1",
