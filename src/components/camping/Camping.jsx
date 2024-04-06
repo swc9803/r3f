@@ -5,9 +5,39 @@ Command: npx gltfjsx@6.2.16 public/models/camping.glb -o src/components/camping/
 
 // npx gltfjsx public/models/camping.glb -o src/components/camping/Camping.jsx -k -K -r public
 
-import { useGLTF } from '@react-three/drei';
+import { Html, useGLTF } from '@react-three/drei';
+import { useAtom } from 'jotai';
+import { degToRad } from 'three/src/math/MathUtils';
+import { currentPageAtom } from './UI';
+import './style.scss';
 
-export const Camping = (props) => {
+const OverlayItem = ({
+  className = '',
+  title,
+  description,
+  price,
+  bgColor,
+  ...props
+}) => {
+  const [currentPage] = useAtom(currentPageAtom);
+  return (
+    <Html
+      transform
+      distanceFactor={1.2}
+      center
+      className={`overlay-item ${currentPage === 'store' ? '' : 'hidden'} ${className}`}
+      {...props}
+    >
+      <div className="content">
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </div>
+      <button style={{ backgroundColor: bgColor }}>Add to cart ${price}</button>
+    </Html>
+  );
+};
+
+export function Camping({ html, ...props }) {
   const { nodes, materials } = useGLTF('/models/camping.glb');
   return (
     <group {...props} dispose={null}>
@@ -152,12 +182,22 @@ export const Camping = (props) => {
           geometry={nodes.group1249314938.geometry}
           material={materials.mat23}
         />
-        <mesh
-          name="tent"
-          geometry={nodes.tent.geometry}
-          material={materials.mat13}
-          position={[0.122, 0.154, -0.288]}
-        />
+        <group position={[0.122, 0.154, -0.288]}>
+          <mesh name="tent" geometry={nodes.tent.geometry} material={materials.mat13} />
+          {html && (
+            <OverlayItem
+              rotation-y={degToRad(20)}
+              position-x={1.2}
+              position-z={1.2}
+              position-y={-0.1}
+              title={'Tent'}
+              description={"2 person tent, rest assured you'll be dry."}
+              price={'129.99'}
+              bgColor={'bg-yellow-500'}
+              className={'transition delay-1000'}
+            />
+          )}
+        </group>
         <mesh
           name="group612170013"
           geometry={nodes.group612170013.geometry}
@@ -551,6 +591,19 @@ export const Camping = (props) => {
           material={materials.mat15}
         />
         <group name="backpack" position={[-0.514, -0.174, 0.45]}>
+          {html && (
+            <OverlayItem
+              position-x={-0.3}
+              position-y={0.44}
+              position-z={0.2}
+              rotation-y={degToRad(20)}
+              title={'Backpack'}
+              description={'Ideal for camping and storing your belongings.'}
+              price={'49.99'}
+              bgColor={'bg-green-500'}
+              className={'transition delay-300'}
+            />
+          )}
           <mesh
             name="mesh812894768"
             geometry={nodes.mesh812894768.geometry}
@@ -1072,6 +1125,18 @@ export const Camping = (props) => {
           material={materials.mat8}
         />
         <group name="lantern" position={[-0.854, -0.033, 1.613]}>
+          {html && (
+            <OverlayItem
+              position-x={-0.4}
+              position-y={-0.2}
+              position-z={0.25}
+              rotation-x={-degToRad(20)}
+              title={'Lantern'}
+              description={'Story time is always better with a lantern.'}
+              price={'39.99'}
+              bgColor={'bg-orange-500'}
+            />
+          )}
           <mesh
             name="mesh1769749722"
             geometry={nodes.mesh1769749722.geometry}
@@ -1266,6 +1331,19 @@ export const Camping = (props) => {
           material={materials.mat15}
         />
         <group name="sleeping-bag" position={[-0.071, -0.366, 1.09]}>
+          {html && (
+            <OverlayItem
+              position-x={0.1}
+              position-y={0.25}
+              position-z={-0.14}
+              rotation-x={-degToRad(30)}
+              title={'Sleeping Bag'}
+              description={'Keeps you warm and comfortable.'}
+              price={'79.99'}
+              bgColor={'bg-blue-500'}
+              className="transition delay-700"
+            />
+          )}
           <mesh
             name="mesh1386167440"
             geometry={nodes.mesh1386167440.geometry}
@@ -1451,6 +1529,6 @@ export const Camping = (props) => {
       </group>
     </group>
   );
-};
+}
 
 useGLTF.preload('/models/camping.glb');
