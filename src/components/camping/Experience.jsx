@@ -4,27 +4,49 @@ import {
   Environment,
   MeshReflectorMaterial,
   RenderTexture,
+  Float,
+  useFont,
 } from '@react-three/drei';
-import { Camping } from './Camping';
 import { degToRad } from 'three/src/math/MathUtils';
 import { useEffect, useRef } from 'react';
+import { Camping } from './Camping';
+import { Color } from 'three';
+
+const bloomColor = new Color('#fff');
+bloomColor.multiplyScalar(1.5);
 
 export const Experience = () => {
   const controls = useRef();
+  const meshFitCameraHome = useRef();
 
   const intro = async () => {
     controls.current.dolly(-22);
     controls.current.smoothTime = 1.6;
     controls.current.dolly(22, true);
+    fitCamera();
+  };
+
+  const fitCamera = async () => {
+    controls.current.fitToBox(meshFitCameraHome.current, true);
   };
 
   useEffect(() => {
     intro();
   }, []);
 
+  useEffect(() => {
+    fitCamera();
+    window.addEventListener('resize', fitCamera);
+    return () => window.removeEventListener('resize', fitCamera);
+  }, []);
+
   return (
     <>
       <CameraControls ref={controls} />
+      <mesh ref={meshFitCameraHome} position-z={1.5} visible={false}>
+        <boxGeometry args={[7.5, 2, 2]} />
+        <meshBasicMaterial />
+      </mesh>
       <Text
         font={'fonts/Poppins-Black.ttf'}
         position={[-1.3, -0.5, 1]}
@@ -34,16 +56,18 @@ export const Experience = () => {
         anchorY={'bottom'}
       >
         MY LITTLE{'\n'}CAMPING
-        <meshBasicMaterial color={'white'} toneMapped={false}>
+        <meshBasicMaterial color={bloomColor} toneMapped={false}>
           <RenderTexture attach={'map'}>
             <color attach="background" args={['#fff']} />
             <Environment preset="sunset" />
-            <Camping
-              scale={1.6}
-              rotation-y={-degToRad(25)}
-              rotation-x={degToRad(40)}
-              position-y={-0.5}
-            />
+            <Float floatIntensity={4} rotationIntensity={5}>
+              <Camping
+                scale={1.6}
+                rotation-y={-degToRad(25)}
+                rotation-x={degToRad(40)}
+                position-y={-0.5}
+              />
+            </Float>
           </RenderTexture>
         </meshBasicMaterial>
       </Text>
@@ -71,3 +95,5 @@ export const Experience = () => {
     </>
   );
 };
+
+useFont.preload('fonts/Poppins-Black.ttf');
