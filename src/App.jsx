@@ -16,6 +16,9 @@ import Can from './components/can/index.jsx';
 import Clip from './components/clip/index.jsx';
 import Camera from './components/camera/index.jsx';
 import Camping from './components/camping/index.jsx';
+import Responsive from './components/responsive/index.jsx';
+import Slideshow from './components/slideshow/index.jsx';
+import Explode from './components/explode/index.jsx';
 import Test from './components/test/index.jsx';
 
 const CanvasContainer = styled.div`
@@ -49,6 +52,9 @@ const App = () => {
           <Route path="/clip" element={<Clip />} />
           <Route path="/camera" element={<Camera />} />
           <Route path="/camping" element={<Camping />} />
+          <Route path="/responsive" element={<Responsive />} />
+          <Route path="/slideshow" element={<Slideshow />} />
+          <Route path="/explode" element={<Explode />} />
           <Route path="/test" element={<Test />} />
         </Routes>
       </CanvasContainer>
