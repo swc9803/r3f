@@ -12,6 +12,8 @@ const App = () => {
         }}
       >
         <Experience />
+
+        <Picker />
       </Canvas>
     </div>
   );

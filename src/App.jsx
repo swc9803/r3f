@@ -19,8 +19,13 @@ import Camping from './components/camping/index.jsx';
 import Responsive from './components/responsive/index.jsx';
 import Slideshow from './components/slideshow/index.jsx';
 import Explode from './components/explode/index.jsx';
-import Shoe from './components/shoe/index.jsx';
+import Star from './components/star/index.jsx';
+import TextBall from './components/textball/index.jsx';
+import Shoes from './components/shoes/index.jsx';
+import Cubes from './components/cubes/index.jsx';
 import Test from './components/test/index.jsx';
+import Test2 from './components/test2/index.jsx';
+import Test3 from './components/test3/index.jsx';
 
 const CanvasContainer = styled.div`
   width: 100%;
@@ -56,8 +61,13 @@ const App = () => {
           <Route path="/responsive" element={<Responsive />} />
           <Route path="/slideshow" element={<Slideshow />} />
           <Route path="/explode" element={<Explode />} />
-          <Route path="/shoe" element={<Shoe />} />
+          <Route path="/star" element={<Star />} />
+          <Route path="/textball" element={<TextBall />} />
+          <Route path="/shoes" element={<Shoes />} />
+          <Route path="/cubes" element={<Cubes />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/test2" element={<Test2 />} />
+          <Route path="/test3" element={<Test3 />} />
         </Routes>
       </CanvasContainer>
     </Router>

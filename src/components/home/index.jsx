@@ -1,4 +1,4 @@
-const Earth = () => {
+const Home = () => {
   return (
     <>
       <p>home</p>
@@ -6,4 +6,4 @@ const Earth = () => {
   );
 };
 
-export default Earth;
+export default Home;

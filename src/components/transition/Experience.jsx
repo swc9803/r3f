@@ -72,11 +72,6 @@ const Experience = () => {
 
     gl.setRenderTarget(renderTarget2);
 
-    // EXAMPLE
-    // renderedScene.current.visible = false;
-    // exampleScene.current.visible = true;
-    // END EXAMPLE
-
     itemsToChangeMaterial.current.forEach((item) => {
       item.material = materials[item.name + mode];
     });

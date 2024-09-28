@@ -13,7 +13,11 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
-    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+      { allowExportNames: ['loader'] },
+    ],
     'react/no-unknown-property': ['off', { ignore: ['JSX'] }],
     'react/prop-types': 'off',
   },

@@ -1,24 +1,24 @@
 import { OrbitControls } from '@react-three/drei';
-import { useControls } from 'leva';
-import { useEffect, useRef } from 'react';
-// import * as THREE from 'three';
+import { useFrame } from '@react-three/fiber';
+import { useRef, useState } from 'react';
 
 const MyElement3D = () => {
   const refMesh = useRef();
   const refWireMesh = useRef();
+  const [xSize, setXSize] = useState(1);
+  const ySize = 1;
+  const zSize = 1;
+  const xSegments = 1;
+  const ySegments = 1;
+  const zSegments = 1;
 
-  const { xSize, ySize, zSize, xSegments, ySegments, zSegments } = useControls({
-    xSize: { value: 1, min: 0.1, max: 5, step: 0.01 },
-    ySize: { value: 1, min: 0.1, max: 5, step: 0.01 },
-    zSize: { value: 1, min: 0.1, max: 5, step: 0.01 },
-    xSegments: { value: 1, min: 1, max: 10, step: 1 },
-    ySegments: { value: 1, min: 1, max: 10, step: 1 },
-    zSegments: { value: 1, min: 1, max: 10, step: 1 },
+  useFrame((state, delta) => {
+    setXSize((prev) => {
+      const newSize = prev + delta;
+      if (newSize >= 5) return 1;
+      return newSize;
+    });
   });
-
-  useEffect(() => {
-    refWireMesh.current.geometry = refMesh.current.geometry;
-  }, [xSize, ySize, zSize, xSegments, ySegments, zSegments]);
 
   return (
     <>
@@ -32,7 +32,7 @@ const MyElement3D = () => {
         <meshStandardMaterial color="#1abc9c" />
       </mesh>
 
-      <mesh ref={refWireMesh}>
+      <mesh ref={refWireMesh} geometry={refMesh.current?.geometry}>
         <meshStandardMaterial emissive="yellow" wireframe={true} />
       </mesh>
     </>

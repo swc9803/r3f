@@ -20,14 +20,13 @@ export const TransitionMaterial = shaderMaterial(
     uniform float progression;
     uniform int transition;
 
-   
+
 
     void main() {
       vec2 uv = vUv;
 
       vec4 _texture = texture2D(tex, uv);
       vec4 _texture2 = texture2D(tex2, uv);
-
       
       vec4 finalTexture;
       if (transition == 0) { // HORIZONTAL
