@@ -2,8 +2,6 @@ import './App.css';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Lenis from '@studio-freight/lenis';
-
 import Home from './components/home/index.jsx';
 import Earth from './components/earth/index.jsx';
 import MipMap from './components/mipmap/index.jsx';
@@ -34,15 +32,6 @@ const CanvasContainer = styled.div`
 `;
 
 const App = () => {
-  const lenis = new Lenis();
-
-  const lenisScroll = (time) => {
-    lenis.raf(time);
-    requestAnimationFrame(lenisScroll);
-  };
-
-  lenisScroll();
-
   return (
     <Router>
       <CanvasContainer>

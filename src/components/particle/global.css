@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   /*
 		https://tailwindcss.com/docs/customizing-colors
@@ -23,19 +19,15 @@ body {
 }
 
 .loader {
-  @apply relative inline-block text-3xl text-color md:text-4xl lg:text-5xl;
 }
 
 .loader:before {
-  @apply absolute -bottom-1 h-2 w-full rounded-xl border border-color md:-bottom-2 md:h-3 lg:-bottom-[0.85rem] lg:h-4;
   content: '';
-  background: linear-gradient(var(--accent-primary) 100%, transparent 0)
-    no-repeat;
+  background: linear-gradient(var(--accent-primary) 100%, transparent 0) no-repeat;
   background-size: var(--bg-size) auto;
 }
 
 .loader:after {
-  @apply relative;
   content: 'Loading';
 }
 
