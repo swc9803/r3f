@@ -23,6 +23,7 @@ import Star from './components/star/index.jsx';
 import TextBall from './components/textball/index.jsx';
 import Shoes from './components/shoes/index.jsx';
 import Cubes from './components/cubes/index.jsx';
+import Bowling from './components/bowling/index.jsx';
 import Test from './components/test/index.jsx';
 import Test2 from './components/test2/index.jsx';
 import Test3 from './components/test3/index.jsx';
@@ -65,6 +66,7 @@ const App = () => {
           <Route path="/textball" element={<TextBall />} />
           <Route path="/shoes" element={<Shoes />} />
           <Route path="/cubes" element={<Cubes />} />
+          <Route path="/bowling" element={<Bowling />} />
           <Route path="/test" element={<Test />} />
           <Route path="/test2" element={<Test2 />} />
           <Route path="/test3" element={<Test3 />} />
